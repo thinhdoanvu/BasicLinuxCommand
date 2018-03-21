@@ -2,53 +2,32 @@ Basic Linux Command for EzRAD
 
 Assume that you have some files like this in your folder that you want to process by dDocent. 
 T_VN_CX68_S69_L006_R1_001.fastq.gz
-
 T_VN_CX68_S69_L006_R2_001.fastq.gz
-
 T_VN_CX69_S80_L006_R1_001.fastq.gz
-
 T_VN_CX69_S80_L006_R2_001.fastq.gz
-
 T_VN_CX6_S63_L006_R1_001.fastq.gz
-
 T_VN_CX6_S63_L006_R2_001.fastq.gz
 
 T_VN_MS7_S42_L006_R1_001.fastq.gz
-
 T_VN_MS7_S42_L006_R2_001.fastq.gz
-
 T_VN_MS1_S38_L006_R1_001.fastq.gz
-
 T_VN_MS1_S38_L006_R2_001.fastq.gz
-
 T_VN_MS26_S21_L006_R1_001.fastq.gz
-
 T_VN_MS26_S21_L006_R2_001.fastq.gz
 
 These are your goals:
-
 VN_CX01.F.fq.gz
-
 VN_CX01.R.fq.gz
-
 VN_CX02.F.fq.gz
-
 VN_CX02.R.fq.gz
-
 VN_CX03.F.fq.gz
-
 VN_CX03.R.fq.gz
 
 VN_MS01.F.fq.gz
-
 VN_MS01.R.fq.gz
-
 VN_MS02.F.fq.gz
-
 VN_MS02.R.fq.gz
-
 VN_MS03.F.fq.gz
-
 VN_MS03.R.fq.gz
 
 You can see that, I renamed T_VN_CX68_S69_L006_R1_001.fastq.gz, T_VN_CX68_S69_L006_R2_001.fastq.gz by VN_CX01.F.fq.gz, and VN_CX01.R.fq.gz, respectively. You can guest that what did I do for all samples.
@@ -135,28 +114,245 @@ ls T_VN_CX*
 
 Here are your results
 T_VN_CX68_S69_L006_R1_001.fastq.gz
-
 T_VN_CX68_S69_L006_R2_001.fastq.gz
-
 T_VN_CX69_S80_L006_R1_001.fastq.gz
-
 T_VN_CX69_S80_L006_R2_001.fastq.gz
-
 T_VN_CX6_S63_L006_R1_001.fastq.gz
-
 T_VN_CX6_S63_L006_R2_001.fastq.gz
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #Step 2. Add mv at the beginning of every lines
 ls T_VN_CX* | awk '{print "mv "$0}'
 
 Here are your results
-mvT_VN_CX68_S69_L006_R1_001.fastq.gz
+mv T_VN_CX68_S69_L006_R1_001.fastq.gz
+mv T_VN_CX68_S69_L006_R2_001.fastq.gz
+mv T_VN_CX69_S80_L006_R1_001.fastq.gz
+mv T_VN_CX69_S80_L006_R2_001.fastq.gz
+mv T_VN_CX6_S63_L006_R1_001.fastq.gz
+mv T_VN_CX6_S63_L006_R2_001.fastq.gz
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 3. Save that in sourename file. Using > sign
+ls T_VN_CX* | awk '{print "mv "$0}' > sourename
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 4. Display content of file. Using cat 
+cat sourcename
+
+Here is your screen
+mv T_VN_CX68_S69_L006_R1_001.fastq.gz
+mv T_VN_CX68_S69_L006_R2_001.fastq.gz
+mv T_VN_CX69_S80_L006_R1_001.fastq.gz
+mv T_VN_CX69_S80_L006_R2_001.fastq.gz
+mv T_VN_CX6_S63_L006_R1_001.fastq.gz
+mv T_VN_CX6_S63_L006_R2_001.fastq.gz
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 5. Relace R1_001.fastq.gz by F.fq.gz
+
+Call ls T_VN_CX* again, and replace R1_001.fastq.gz by F.fq.gz
+
+Here is your command:
+ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g'
+
+Here is your result
+T_VN_CX68_S69_L006_F.fq.gz
 T_VN_CX68_S69_L006_R2_001.fastq.gz
-
-T_VN_CX69_S80_L006_R1_001.fastq.gz
-
+T_VN_CX69_S80_L006_F.fq.gz
 T_VN_CX69_S80_L006_R2_001.fastq.gz
-
-T_VN_CX6_S63_L006_R1_001.fastq.gz
-
+T_VN_CX6_S63_L006_F.fq.gz
 T_VN_CX6_S63_L006_R2_001.fastq.gz
+
+WHAT IS GOING ON?
+###################
+@ sed command
+search and replace
+###################
+sed 's/find_content/relplcae_with/g' file_name
+s: standfor search
+g: stand for global
+
+Now, similary results if you want to replace R2_001.fastq.gz by R.fq.gz
+
+This is your goal:
+T_VN_CX68_S69_L006_F.fq.gz
+T_VN_CX68_S69_L006_R.fq.gz
+T_VN_CX69_S80_L006_F.fq.gz
+T_VN_CX69_S80_L006_R.fq.gz
+T_VN_CX6_S63_L006_F.fq.gz
+T_VN_CX6_S63_L006_R.fq.gz
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 6. I want to filter F or R .fq.gz without the left hand side of name file. Like this
+F.fq.gz
+R.fq.gz
+F.fq.gz
+R.fq.gz
+F.fq.gz
+R.fq.gz
+
+Here is your command:
+ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g'| cut -f6 -d "_"
+
+WHAT???
+######################
+@ cut command
+#####################
+-f: field or column
+-f6: column 6th
+-d: decription by 
+-d "_" means: by _ character
+
+Forexampl, T_VN_CX68_S69_L006_F.fq.gz when I repalce _ by \t it will become
+column_1: T
+column_2: VN
+column_3: CX68
+column_4: S69
+column_5: L006
+column_6: F.fq.gz
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 7. Save your result from 6th step to rename temp1 file. Like this
+ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g'| cut -f6 -d "_" > temp1
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 8. Display your temp1 by: cat temp1
+Here is your screen
+F.fq.gz
+R.fq.gz
+F.fq.gz
+R.fq.gz
+F.fq.gz
+R.fq.gz
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 9. Concat VN_CX string to stt and temp1 file. Like so
+VN_CX01.F.fq.gz
+VN_CX01.R.fq.gz
+VN_CX02.F.fq.gz
+VN_CX02.R.fq.gz
+VN_CX03.F.fq.gz
+VN_CX03.R.fq.gz
+
+HOW CAN I DO THAT????
+
+1. I will concat stt with temp1 first. Using paste command
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+@ paste command
+like paste in Word or Excel programs, but it only for column not row
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+Here is your command:
+paste stt temp1
+
+Results is:
+01 F.fq.gz
+01 R.fq.gz
+02 F.fq.gz
+02 R.fq.gz
+03 F.fq.gz
+03 R.fq.gz
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+2. Adding VN_CX at the begining at each line. Using awk
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Here is your command:
+paste stt temp1 | awk '{print "VN_CX"$0}'
+
+Results is:
+VN_CX01 F.fq.gz
+VN_CX01 R.fq.gz
+VN_CX02 F.fq.gz
+VN_CX02 R.fq.gz
+VN_CX03 F.fq.gz
+VN_CX03 R.fq.gz
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+3. Replace tab chracter by . character. Using sed
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Here is your command:
+paste stt temp1 | awk '{print "VN_CX"$0}' | sed 's/\t/./g'
+
+Results is:
+VN_CX01.F.fq.gz
+VN_CX01.R.fq.gz
+VN_CX02.F.fq.gz
+VN_CX02.R.fq.gz
+VN_CX03.F.fq.gz
+VN_CX03.R.fq.gz
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+4. Save result in 3rd step above by > sign
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Here is your command:
+paste stt temp1 | awk '{print "VN_CX"$0}' | sed 's/\t/./g' > rename
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+5. Display rename file by cat
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+cat rename
+
+Here is your result
+
+VN_CX01.F.fq.gz
+VN_CX01.R.fq.gz
+VN_CX02.F.fq.gz
+VN_CX02.R.fq.gz
+VN_CX03.F.fq.gz
+VN_CX03.R.fq.gz
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+6. Concat source name and rename in one file .sh. Using paste 
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+paste sourcename rename > myshell.sh
+
+Here is your result
+mv T_VN_CX68_S69_L006_R1_001.fastq.gz VN_CX01.F.fq.gz
+mv T_VN_CX68_S69_L006_R2_001.fastq.gz VN_CX01.R.fq.gz
+mv T_VN_CX69_S80_L006_R1_001.fastq.gz VN_CX02.F.fq.gz
+mv T_VN_CX69_S80_L006_R2_001.fastq.gz VN_CX02.R.fq.gz
+mv T_VN_CX6_S63_L006_R1_001.fastq.gz VN_CX03.F.fq.gz
+mv T_VN_CX6_S63_L006_R2_001.fastq.gz VN_CX03.R.fq.gz 
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+7. Permit to run myshell.sh. Using chmod 755
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+chmod 755 myshell.sh
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+8. RUN
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+./myshell.sh
+after that, please type ls and press Enter key. Like this
+ls
+
+****************************************************************************
+*************************HERE IS YOUR SCREEN*******************************
+T_VN_MS7_S42_L006_R1_001.fastq.gz
+T_VN_MS7_S42_L006_R2_001.fastq.gz
+T_VN_MS1_S38_L006_R1_001.fastq.gz
+T_VN_MS1_S38_L006_R2_001.fastq.gz
+T_VN_MS26_S21_L006_R1_001.fastq.gz
+T_VN_MS26_S21_L006_R2_001.fastq.gz
+VN_CX01.F.fq.gz
+VN_CX01.R.fq.gz
+VN_CX02.F.fq.gz
+VN_CX02.R.fq.gz
+VN_CX03.F.fq.gz
+VN_CX03.R.fq.gz
+****************************************************************************
+
+REPEAT ALL STEPS FOR T_VN_MS* THAT WE CAN HAVE
+
+VN_MS01.F.fq.gz
+VN_MS01.R.fq.gz
+VN_MS02.F.fq.gz
+VN_MS02.R.fq.gz
+VN_MS03.F.fq.gz
+VN_MS04.R.fq.gz
+VN_CX01.F.fq.gz
+VN_CX01.R.fq.gz
+VN_CX02.F.fq.gz
+VN_CX02.R.fq.gz
+VN_CX03.F.fq.gz
+VN_CX03.R.fq.gz
+
+*****************GOOD LUCK TO YOU***************
