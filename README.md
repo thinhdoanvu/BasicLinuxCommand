@@ -69,7 +69,7 @@ Result is
 
 ##############################
 @ awk
-awk '{print }' filaname
+awk '{print }' filename
 ##############################
 I want to double lines in "seq 1 3" command before. I will do this
 seq 1 3 | awk '{print $0"\n"$0}'
@@ -95,8 +95,68 @@ Here is fully command: seq 1 3 | awk '{print $0"\n"$0}' > stt
 @ nano 
 ####################################
 Because we have many files, 1 to 32 forexample. We need to replace 1 by 01 and 9 to 09... in order to equal with length of file names
-Here is command: nano t
+Here is command: nano stt
+Your window like this
+1
+1
+2
+2
+3
+3
+Edit line by hand with 0 character at the begining of line
+This is your result:
+01
+01
+02
+02
+03
+03
+Press Ctl + X, and then Press Y for save with the same name, and close nano window
 
+#########################
+@ ls 
+list file or folde name with basic or detail information
+#########################
+I want to display indivials in VN_CX location. So I use
+ls VN_CX*
+* stand for anything on the right of the file name
 
+#########################
+@ mv
+rename file or folder
+mv oldname newname
+#########################
+I want to change T_VN_CX68_S69_L006_R1_001.fastq.gz to VN_CX01.F.fq.gz. I will use mv command. Here is command
+mv T_VN_CX68_S69_L006_R1_001.fastq.gz VN_CX01.F.fq.gz
+Furthermore, I want to change all my files
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 1. list all files you want to change by names
+ls T_VN_CX*
 
+Here are your results
+T_VN_CX68_S69_L006_R1_001.fastq.gz
 
+T_VN_CX68_S69_L006_R2_001.fastq.gz
+
+T_VN_CX69_S80_L006_R1_001.fastq.gz
+
+T_VN_CX69_S80_L006_R2_001.fastq.gz
+
+T_VN_CX6_S63_L006_R1_001.fastq.gz
+
+T_VN_CX6_S63_L006_R2_001.fastq.gz
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+#Step 2. Add mv at the beginning of every lines
+ls T_VN_CX* | awk '{print "mv "$0}'
+
+Here are your results
+mvT_VN_CX68_S69_L006_R1_001.fastq.gz
+T_VN_CX68_S69_L006_R2_001.fastq.gz
+
+T_VN_CX69_S80_L006_R1_001.fastq.gz
+
+T_VN_CX69_S80_L006_R2_001.fastq.gz
+
+T_VN_CX6_S63_L006_R1_001.fastq.gz
+
+T_VN_CX6_S63_L006_R2_001.fastq.gz
