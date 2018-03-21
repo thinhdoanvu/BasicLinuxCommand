@@ -1,4 +1,3 @@
-# BasicLinuxCommand
 Basic Linux Command for EzRAD
 
 Assume that you have some files like this in your folder that you want to process by dDocent. 
