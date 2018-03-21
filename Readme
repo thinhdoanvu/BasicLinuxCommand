@@ -172,6 +172,9 @@ g: stand for global
 
 Now, similary results if you want to replace R2_001.fastq.gz by R.fq.gz
 
+Here is your command:
+ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g' | sed 's/R2_001.fastq.gz/R.fq.gz/g'
+
 This is your goal:
 T_VN_CX68_S69_L006_F.fq.gz
 T_VN_CX68_S69_L006_R.fq.gz
@@ -190,7 +193,7 @@ F.fq.gz
 R.fq.gz
 
 Here is your command:
-ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g'| cut -f6 -d "_"
+ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g' | sed 's/R2_001.fastq.gz/R.fq.gz/g' | cut -f6 -d "_"
 
 WHAT???
 ######################
@@ -201,7 +204,7 @@ WHAT???
 -d: decription by 
 -d "_" means: by _ character
 
-Forexampl, T_VN_CX68_S69_L006_F.fq.gz when I repalce _ by \t it will become
+Forexample, T_VN_CX68_S69_L006_F.fq.gz when I repalce _ by \t it will become
 column_1: T
 column_2: VN
 column_3: CX68
@@ -211,7 +214,7 @@ column_6: F.fq.gz
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #Step 7. Save your result from 6th step to rename temp1 file. Like this
-ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g'| cut -f6 -d "_" > temp1
+ls T_VN_CX* | sed 's/R1_001.fastq.gz/F.fq.gz/g' | sed 's/R2_001.fastq.gz/R.fq.gz/g' | cut -f6 -d "_" > temp1
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #Step 8. Display your temp1 by: cat temp1
